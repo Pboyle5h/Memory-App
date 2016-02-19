@@ -98,6 +98,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Easy.xaml.cs">
+      <DependentUpon>Easy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,19 @@
     <None Include="Memory App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pictures\briefcase.png" />
+    <Content Include="Pictures\calendar.png" />
+    <Content Include="Pictures\camera.png" />
+    <Content Include="Pictures\hat.png" />
+    <Content Include="Pictures\leaf.png" />
+    <Content Include="Pictures\map.png" />
+    <Content Include="Pictures\mic.png" />
+    <Content Include="Pictures\safety pin.png" />
+    <Content Include="Pictures\sand clock.png" />
+    <Content Include="Pictures\settings.png" />
+    <Content Include="Pictures\specs.png" />
+    <Content Include="Pictures\television.png" />
+    <Content Include="Pictures\video camera.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -124,11 +140,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Easy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
