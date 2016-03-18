@@ -113,19 +113,23 @@
     <None Include="Memory App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pictures\briefcase.png" />
-    <Content Include="Pictures\calendar.png" />
-    <Content Include="Pictures\camera.png" />
-    <Content Include="Pictures\hat.png" />
-    <Content Include="Pictures\leaf.png" />
-    <Content Include="Pictures\map.png" />
-    <Content Include="Pictures\mic.png" />
-    <Content Include="Pictures\safety pin.png" />
-    <Content Include="Pictures\sand clock.png" />
-    <Content Include="Pictures\settings.png" />
-    <Content Include="Pictures\specs.png" />
-    <Content Include="Pictures\television.png" />
-    <Content Include="Pictures\video camera.png" />
+    <Content Include="Pictures\background_mdpi.png" />
+    <Content Include="Pictures\bell.png" />
+    <Content Include="Pictures\bell2.png" />
+    <Content Include="Pictures\bottle.png" />
+    <Content Include="Pictures\bottle2.png" />
+    <Content Include="Pictures\cheese.png" />
+    <Content Include="Pictures\cheese2.png" />
+    <Content Include="Pictures\folder.png" />
+    <Content Include="Pictures\folder2.png" />
+    <Content Include="Pictures\gauge.png" />
+    <Content Include="Pictures\gauge2.png" />
+    <Content Include="Pictures\hamburger.png" />
+    <Content Include="Pictures\hamburger2.png" />
+    <Content Include="Pictures\watch.png" />
+    <Content Include="Pictures\watch2.png" />
+    <Content Include="Pictures\wine.png" />
+    <Content Include="Pictures\wine2.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
