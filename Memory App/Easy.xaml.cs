@@ -42,35 +42,34 @@ namespace Memory_App
                 "ms-appx:///Pictures/gauge.png",
                 "ms-appx:///Pictures/hamburger.png",
                 "ms-appx:///Pictures/watch.png",
-                "ms-appx:///Pictures/wine.png"
-                //"ms-appx:///Pictures/bell2.png",
-                //"ms-appx:///Pictures/bottle2.png",
-                //"ms-appx:///Pictures/cheese2.png",
-                //"ms-appx:///Pictures/folder2.png",
-                //"ms-appx:///Pictures/gauge2.png",
-                //"ms-appx:///Pictures/hamburger2.png",
-                //"ms-appx:///Pictures/watch2.png",
-                //"ms-appx:///Pictures/wine2.png"
+                "ms-appx:///Pictures/wine.png",
+                "ms-appx:///Pictures/bell2.png",
+                "ms-appx:///Pictures/bottle2.png",
+                "ms-appx:///Pictures/cheese2.png",
+                "ms-appx:///Pictures/folder2.png",
+                "ms-appx:///Pictures/gauge2.png",
+                "ms-appx:///Pictures/hamburger2.png",
+                "ms-appx:///Pictures/watch2.png",
+                "ms-appx:///Pictures/wine2.png"
 
             };
             List<Image> imgs = new List<Image>()
             {
-                image1, image2, image3, image4, image5,
-                image6, image7, image8, image9, image10,
-                image11, image12, image13, image14, image15, image16
+                image0, image1, image2, image3, image4,
+                image5, image6, image7, image8, image9,
+                image10, image11, image12, image13, image14, image15
             };
-           for (int i=0; i<=15; i++)
+           for (int i=15; i>=0; i--)
            {
 
-                Image img = new Image();
-                img.Name = "image" + i;
+                int randomNumber = rnd.Next(0, pics1.Count);
                 ImageBrush brush1 = new ImageBrush();
-                brush1.ImageSource = new BitmapImage(new Uri(pics1[rnd.Next(0, 7)], UriKind.Absolute));
-                
+                brush1.ImageSource = new BitmapImage(new Uri(pics1[randomNumber], UriKind.Absolute));
+
                 imgs[i].Source = brush1.ImageSource;
-                //pics1.RemoveAt(i);
+                pics1.RemoveAt(randomNumber);
             }
-            
+
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
