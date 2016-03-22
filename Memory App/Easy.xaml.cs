@@ -24,11 +24,21 @@ namespace Memory_App
     public sealed partial class Easy : Page
     {
         public Random rnd = new Random();
+        public Boolean firstClick = true;
+        public string img1, img2, butName;
+       
+        List<Button> butList = new List<Button>()
+        {
+
+
+        };
 
         public Easy()
         {
             this.InitializeComponent();
             randomPic();
+            
+
         }
 
         public void randomPic()
@@ -43,16 +53,17 @@ namespace Memory_App
                 "ms-appx:///Pictures/hamburger.png",
                 "ms-appx:///Pictures/watch.png",
                 "ms-appx:///Pictures/wine.png",
-                "ms-appx:///Pictures/bell2.png",
-                "ms-appx:///Pictures/bottle2.png",
-                "ms-appx:///Pictures/cheese2.png",
-                "ms-appx:///Pictures/folder2.png",
-                "ms-appx:///Pictures/gauge2.png",
-                "ms-appx:///Pictures/hamburger2.png",
-                "ms-appx:///Pictures/watch2.png",
-                "ms-appx:///Pictures/wine2.png"
+                "ms-appx:///Pictures/bell.png",
+                "ms-appx:///Pictures/bottle.png",
+                "ms-appx:///Pictures/cheese.png",
+                "ms-appx:///Pictures/folder.png",
+                "ms-appx:///Pictures/gauge.png",
+                "ms-appx:///Pictures/hamburger.png",
+                "ms-appx:///Pictures/watch.png",
+                "ms-appx:///Pictures/wine.png"
 
             };
+
             List<Image> imgs = new List<Image>()
             {
                 image0, image1, image2, image3, image4,
@@ -63,29 +74,149 @@ namespace Memory_App
            {
 
                 int randomNumber = rnd.Next(0, pics1.Count);
+
                 ImageBrush brush1 = new ImageBrush();
                 brush1.ImageSource = new BitmapImage(new Uri(pics1[randomNumber], UriKind.Absolute));
 
                 imgs[i].Source = brush1.ImageSource;
                 pics1.RemoveAt(randomNumber);
+                imgs[i].Visibility = Visibility.Collapsed;
             }
+
+            
+
+
 
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            
+            image0.Visibility = Visibility.Visible;
+            button.Visibility = Visibility.Collapsed;
+            if (firstClick)
+            {
+
+                img1 = ((BitmapImage)image0.Source).UriSource.ToString();
+                butList.Add(button);
+                firstClick = false;
+            }
+            else
+            {
+                img2 = ((BitmapImage)image0.Source).UriSource.ToString();
+                if (img1 == img2)
+                {
+
+
+                }
+                else
+                {
+                    button.Visibility = Visibility.Visible;
+                    butList[0].Visibility = Visibility.Visible;
+                    butList.RemoveAt(0);
+                    firstClick = true;
+
+                }
+
+            }
+
+
         }
 
-        private void button3_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
-            image1.Visibility = Visibility.Collapsed;
+            image1.Visibility = Visibility.Visible;
+            button1.Visibility = Visibility.Collapsed;
+            if (firstClick)
+            {
+
+                img1 = ((BitmapImage)image1.Source).UriSource.ToString();
+                butList.Add(button1);
+                firstClick = false;
+            }
+            else
+            {
+                img2 = ((BitmapImage)image1.Source).UriSource.ToString();
+                if (img1 == img2)
+                {
+
+
+                }
+                else
+                {
+                    button1.Visibility = Visibility.Visible;
+                    butList[0].Visibility = Visibility.Visible;
+                    butList.RemoveAt(0);
+                    firstClick = true;
+
+                }
+
+            }
         }
 
         private void button2_Click_1(object sender, RoutedEventArgs e)
         {
-            //button2.Opacity = 100;
-            
+            image2.Visibility = Visibility.Visible;
+            button2.Visibility = Visibility.Collapsed;
+            if (firstClick)
+            {
+
+                img1 = ((BitmapImage)image2.Source).UriSource.ToString();
+                butList.Add(button2);
+                firstClick = false;
+            }
+            else
+            {
+                img2 = ((BitmapImage)image2.Source).UriSource.ToString();
+                if (img1 == img2)
+                {
+
+
+                }
+                else
+                {
+                    button2.Visibility = Visibility.Visible;
+                    butList[0].Visibility = Visibility.Visible;
+                    butList.RemoveAt(0);
+                    firstClick = true;
+
+                }
+
+            }
+
         }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            image3.Visibility = Visibility.Visible;
+            button3.Visibility = Visibility.Collapsed;
+            if(firstClick)
+            {
+                
+                img1 = ((BitmapImage)image3.Source).UriSource.ToString();
+                butList.Add(button3);                    
+                firstClick = false;
+            }
+            else
+            {
+                img2=((BitmapImage)image3.Source).UriSource.ToString();
+                if(img1==img2)
+                {
+                                  
+                
+                }
+                else
+                {
+                    button3.Visibility = Visibility.Visible;
+                    butList[0].Visibility = Visibility.Visible;
+                    butList.RemoveAt(0);
+                    firstClick = true;
+
+                }
+
+            }
+
+        }
+
+        
     }
 }
