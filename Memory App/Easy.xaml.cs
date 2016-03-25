@@ -28,7 +28,14 @@ namespace Memory_App
         public Random rnd = new Random();
         public Boolean firstClick = true;
         public string img1, img2, butName;
+        public int moves = 15;
+        public int eScore = 0;
+        public TextBox txtBox;
+        public int timer = 0;
+        public DispatcherTimer Timer;
+       
         
+                
         List<Button> butList = new List<Button>()
         {
         };
@@ -40,8 +47,102 @@ namespace Memory_App
         public Easy()
         {
             this.InitializeComponent();
+            Timer = new DispatcherTimer();
+            Timer.Interval = new TimeSpan(0, 0, 1);
+            Timer.Tick += countdown;
+            score.Visibility = Visibility.Collapsed;
+            eScoreTxt.Visibility = Visibility.Collapsed;
             randomPic();
+            level();
+           
             
+
+        }
+        public void level()
+        {
+            switch (App.level)
+            {
+                case 1:
+                    eScoreTxt.Visibility = Visibility.Visible;
+                    eScoreTxt.Text = eScore.ToString();
+                    ImageBrush brush1 = new ImageBrush();
+                    brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/easyLevel2.png", UriKind.Absolute));
+                    image12.Source = brush1.ImageSource;
+                    break;
+                case 2:                  
+                    score.Visibility = Visibility.Visible;
+                    score.Text = moves.ToString();
+                    ImageBrush brush2 = new ImageBrush();
+                    brush2.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/mediumLevel.png", UriKind.Absolute));
+                    image13.Source = brush2.ImageSource;
+                    break;
+                case 3:
+                    break;
+
+            }
+
+
+            
+        }
+        public async void test(Button but, Image img)
+        {
+            img.Visibility = Visibility.Visible;
+            but.Visibility = Visibility.Collapsed;
+            if (firstClick)
+            {
+
+                img1 = ((BitmapImage)img.Source).UriSource.ToString();
+                butList.Add(but);
+                imgList.Add(img);
+                firstClick = false;
+            }
+            else
+            {
+                img2 = ((BitmapImage)img.Source).UriSource.ToString();
+                if (img1 == img2)
+                {
+                    disableButtons();
+                    img.Visibility = Visibility.Visible;
+                    but.Visibility = Visibility.Collapsed;
+                    butList[0].Visibility = Visibility.Collapsed;
+                    imgList[0].Visibility = Visibility.Visible;
+                    imgList.RemoveAt(0);
+                    butList.RemoveAt(0);
+                    firstClick = true;
+                    moves--;
+                    eScore++;
+                    eScoreTxt.Text = eScore.ToString();
+                    score.Text = moves.ToString();
+                    enableButtons();
+
+
+                }
+
+                else
+                {
+                    disableButtons();
+                    await Task.Delay(1000);                    
+                    img.Visibility = Visibility.Collapsed;
+                    but.Visibility = Visibility.Visible;
+                    butList[0].Visibility = Visibility.Visible;
+                    imgList[0].Visibility = Visibility.Collapsed;
+                    butList.RemoveAt(0);
+                    imgList.RemoveAt(0);
+                    firstClick = true;                    
+                    moves--;
+                    eScore++;
+                    eScoreTxt.Text = eScore.ToString();
+                    score.Text = moves.ToString();
+                    enableButtons();
+
+                }
+                
+            }
+
+        }
+        public void countdown(object sender, EventArgs e)
+        {
+            tho
 
         }
 
@@ -55,16 +156,12 @@ namespace Memory_App
                 "ms-appx:///Pictures/folder.png",
                 "ms-appx:///Pictures/gauge.png",
                 "ms-appx:///Pictures/hamburger.png",
-                "ms-appx:///Pictures/watch.png",
-                "ms-appx:///Pictures/wine.png",
                 "ms-appx:///Pictures/bell.png",
                 "ms-appx:///Pictures/bottle.png",
                 "ms-appx:///Pictures/cheese.png",
                 "ms-appx:///Pictures/folder.png",
                 "ms-appx:///Pictures/gauge.png",
-                "ms-appx:///Pictures/hamburger.png",
-                "ms-appx:///Pictures/watch.png",
-                "ms-appx:///Pictures/wine.png"
+                "ms-appx:///Pictures/hamburger.png"                
 
             };
 
@@ -72,9 +169,9 @@ namespace Memory_App
             {
                 image0, image1, image2, image3, image4,
                 image5, image6, image7, image8, image9,
-                image10, image11, image12, image13, image14, image15
+                image10, image11
             };
-           for (int i=15; i>=0; i--)
+           for (int i=11; i>=0; i--)
            {
 
                 int randomNumber = rnd.Next(0, pics1.Count);
@@ -85,715 +182,118 @@ namespace Memory_App
                 imgs[i].Source = brush1.ImageSource;
                 pics1.RemoveAt(randomNumber);
                 imgs[i].Visibility = Visibility.Collapsed;
-            }
-
-            
-
-
-
+            }         
         }
 
-        private async void button_Click(object sender, RoutedEventArgs e)
+        public async void disableButtons()
         {
-            image0.Visibility = Visibility.Visible;
-            button.Visibility = Visibility.Collapsed;
-            if (firstClick)
+            List<Button> buttons = new List<Button>()
             {
+                button, button1, button2, button3, button4,
+                button5, button6, button7, button8, button9,
+                button10, button11
+            };
 
-                img1 = ((BitmapImage)image0.Source).UriSource.ToString();
-                butList.Add(button);
-                imgList.Add(image0);
-                firstClick = false;
-            }
-            else
+            for (int i = 0; i<buttons.Count; i++)
             {
-                img2 = ((BitmapImage)image0.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image0.Visibility = Visibility.Visible;
-                    button.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image0.Visibility = Visibility.Collapsed;
-                    button.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
+                buttons[i].IsEnabled = false;
+             
             }
-
-
         }
 
-        private async void button1_Click(object sender, RoutedEventArgs e)
+        public async void enableButtons()
         {
-            image1.Visibility = Visibility.Visible;
-            button1.Visibility = Visibility.Collapsed;
-            if (firstClick)
+            List<Button> buttons = new List<Button>()
             {
+                button, button1, button2, button3, button4,
+                button5, button6, button7, button8, button9,
+                button10, button11
+            };
 
-                img1 = ((BitmapImage)image1.Source).UriSource.ToString();
-                butList.Add(button1);
-                imgList.Add(image1);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image1.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image1.Visibility = Visibility.Visible;
-                    button1.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image1.Visibility = Visibility.Collapsed;
-                    button1.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
+            for (int i = 0; i < buttons.Count; i++)
+            {               
+                buttons[i].IsEnabled = true;
             }
         }
 
-        private async void button4_Click(object sender, RoutedEventArgs e)
+        private  void button_Click(object sender, RoutedEventArgs e)
         {
-            image4.Visibility = Visibility.Visible;
-            button4.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image4.Source).UriSource.ToString();
-                butList.Add(button4);
-                imgList.Add(image4);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image4.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image4.Visibility = Visibility.Visible;
-                    button4.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-                else
-                {
-                    await Task.Delay(2000);
-                    image4.Visibility = Visibility.Collapsed;
-                    button4.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
+            test(button, image0);
 
         }
 
-
-
-        private async void button2_Click_1(object sender, RoutedEventArgs e)
+        private  void button1_Click(object sender, RoutedEventArgs e)
         {
-            image2.Visibility = Visibility.Visible;
-            button2.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image2.Source).UriSource.ToString();
-                butList.Add(button2);
-                imgList.Add(image2);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image2.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image2.Visibility = Visibility.Visible;
-                    button2.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    button2.Visibility = Visibility.Visible;
-                    image2.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
+            test(button1, image1);
         }
-
-
-        private async void button3_Click(object sender, RoutedEventArgs e)
+       
+        private void button4_Click(object sender, RoutedEventArgs e)
         {
-            image3.Visibility = Visibility.Visible;
-            button3.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image3.Source).UriSource.ToString();
-                butList.Add(button3);
-                imgList.Add(image3);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image3.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image3.Visibility = Visibility.Visible;
-                    button3.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    button3.Visibility = Visibility.Visible;
-                    image3.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
+            test(button4, image4);
 
         }
 
 
 
-        private async void button5_Click(object sender, RoutedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
-            image5.Visibility = Visibility.Visible;
-            button5.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image5.Source).UriSource.ToString();
-                butList.Add(button5);
-                imgList.Add(image5);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image5.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image5.Visibility = Visibility.Visible;
-                    button5.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    button5.Visibility = Visibility.Visible;
-                    image5.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
+            test(button2, image2);
 
         }
 
-        private async void button8_Click(object sender, RoutedEventArgs e)
+
+        private void button3_Click(object sender, RoutedEventArgs e)
         {
-            image8.Visibility = Visibility.Visible;
-            button8.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image8.Source).UriSource.ToString();
-                butList.Add(button8);
-                imgList.Add(image8);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image8.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image8.Visibility = Visibility.Visible;
-                    button8.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    button8.Visibility = Visibility.Visible;
-                    image8.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
+            test(button3, image3);
 
         }
 
-        private async void button9_Click(object sender, RoutedEventArgs e)
+
+
+        private void button5_Click(object sender, RoutedEventArgs e)
         {
-            image9.Visibility = Visibility.Visible;
-            button9.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image9.Source).UriSource.ToString();
-                butList.Add(button9);
-                imgList.Add(image9);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image9.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image9.Visibility = Visibility.Visible;
-                    button9.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image9.Visibility = Visibility.Collapsed;                  
-                    button9.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
+            test(button5, image5);
 
         }
 
-        private async void button10_Click(object sender, RoutedEventArgs e)
+        private void button6_Click(object sender, RoutedEventArgs e)
         {
-            image10.Visibility = Visibility.Visible;
-            button10.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image10.Source).UriSource.ToString();
-                butList.Add(button10);
-                imgList.Add(image10);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image10.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image10.Visibility = Visibility.Visible;
-                    button10.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    button10.Visibility = Visibility.Visible;
-                    image10.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
-
+            test(button6, image6);
         }
 
-        private async void button11_Click(object sender, RoutedEventArgs e)
+        private void button7_Click(object sender, RoutedEventArgs e)
         {
-            image11.Visibility = Visibility.Visible;
-            button11.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image11.Source).UriSource.ToString();
-                butList.Add(button11);
-                imgList.Add(image11);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image11.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image11.Visibility = Visibility.Visible;
-                    button11.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image11.Visibility = Visibility.Collapsed;
-                    button11.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
-
+            test(button7, image7);
         }
-
-        private async void button12_Click(object sender, RoutedEventArgs e)
+        private void button8_Click(object sender, RoutedEventArgs e)
         {
-            image12.Visibility = Visibility.Visible;
-            button12.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image12.Source).UriSource.ToString();
-                butList.Add(button12);
-                imgList.Add(image12);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image12.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image12.Visibility = Visibility.Visible;
-                    button12.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image12.Visibility = Visibility.Collapsed;
-                    button12.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
+            test(button8, image8);
 
 
         }
 
-        private async void button13_Click(object sender, RoutedEventArgs e)
+        private  void button9_Click(object sender, RoutedEventArgs e)
         {
-            image13.Visibility = Visibility.Visible;
-            button13.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image13.Source).UriSource.ToString();
-                butList.Add(button13);
-                imgList.Add(image13);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image13.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image13.Visibility = Visibility.Visible;
-                    button13.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image13.Visibility = Visibility.Collapsed;
-                    button13.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
+            test(button9, image9);
 
 
         }
 
-        private async void button14_Click(object sender, RoutedEventArgs e)
+        private void button10_Click(object sender, RoutedEventArgs e)
         {
-            image14.Visibility = Visibility.Visible;
-            button14.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image14.Source).UriSource.ToString();
-                butList.Add(button14);
-                imgList.Add(image14);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image14.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image14.Visibility = Visibility.Visible;
-                    button14.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image14.Visibility = Visibility.Collapsed;
-                    button14.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
+            test(button10, image10);
 
         }
 
-        private async void button15_Click(object sender, RoutedEventArgs e)
+        private void button11_Click(object sender, RoutedEventArgs e)
         {
-            image15.Visibility = Visibility.Visible;
-            button15.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image15.Source).UriSource.ToString();
-                butList.Add(button15);
-                imgList.Add(image15);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image15.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image15.Visibility = Visibility.Visible;
-                    button15.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image15.Visibility = Visibility.Collapsed;
-                    button15.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
+            test(button11, image11);
 
         }
 
-        private async void button6_Click(object sender, RoutedEventArgs e)
-        {
+       
 
-            image6.Visibility = Visibility.Visible;
-            button6.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image6.Source).UriSource.ToString();
-                butList.Add(button6);
-                imgList.Add(image6);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image6.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image6.Visibility = Visibility.Visible;
-                    button6.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image6.Visibility = Visibility.Collapsed;
-                    button6.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-
-        }
-
-        private async void button7_Click(object sender, RoutedEventArgs e)
-        {
-            image7.Visibility = Visibility.Visible;
-            button7.Visibility = Visibility.Collapsed;
-            if (firstClick)
-            {
-
-                img1 = ((BitmapImage)image7.Source).UriSource.ToString();
-                butList.Add(button7);
-                imgList.Add(image7);
-                firstClick = false;
-            }
-            else
-            {
-                img2 = ((BitmapImage)image7.Source).UriSource.ToString();
-                if (img1 == img2)
-                {
-                    image7.Visibility = Visibility.Visible;
-                    button7.Visibility = Visibility.Collapsed;
-                    butList[0].Visibility = Visibility.Collapsed;
-                    imgList[0].Visibility = Visibility.Visible;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                    image7.Visibility = Visibility.Collapsed;
-                    button7.Visibility = Visibility.Visible;
-                    butList[0].Visibility = Visibility.Visible;
-                    imgList[0].Visibility = Visibility.Collapsed;
-                    imgList.RemoveAt(0);
-                    butList.RemoveAt(0);
-                    firstClick = true;
-
-                }
-
-            }
-        }
+        
 
 
     }
