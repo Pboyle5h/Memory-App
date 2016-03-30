@@ -31,7 +31,7 @@ namespace Memory_App
         public int moves = 15;
         public int eScore = 0;
         public TextBox txtBox;
-        public int timer = 0;
+        public int time = 30;
         public DispatcherTimer Timer;
        
         
@@ -49,7 +49,8 @@ namespace Memory_App
             this.InitializeComponent();
             Timer = new DispatcherTimer();
             Timer.Interval = new TimeSpan(0, 0, 1);
-            Timer.Tick += countdown;
+            Timer.Tick += countdownTimer;
+            Timer.Start();
             score.Visibility = Visibility.Collapsed;
             eScoreTxt.Visibility = Visibility.Collapsed;
             randomPic();
@@ -58,7 +59,35 @@ namespace Memory_App
             
 
         }
-        public void level()
+
+        private void countdownTimer(object sender, object e)
+        {
+           
+            if (time > 0)
+            {
+                if (time <= 10)
+                {
+                    time--;
+                    countdown.Text = string.Format("{1}", time / 60, time % 60);
+                }
+                else
+                {
+                    time--;
+                    countdown.Text = string.Format("{1}", time / 60, time % 60);
+                }
+            }
+            else
+            {
+                Timer.Stop();
+
+            }
+
+
+        }
+
+    
+
+    public void level()
         {
             switch (App.level)
             {
@@ -140,12 +169,7 @@ namespace Memory_App
             }
 
         }
-        public void countdown(object sender, EventArgs e)
-        {
-            tho
-
-        }
-
+       
         public void randomPic()
         {
             List<string> pics1 = new List<string>()
@@ -185,7 +209,7 @@ namespace Memory_App
             }         
         }
 
-        public async void disableButtons()
+        public void disableButtons()
         {
             List<Button> buttons = new List<Button>()
             {
@@ -201,7 +225,7 @@ namespace Memory_App
             }
         }
 
-        public async void enableButtons()
+        public  void enableButtons()
         {
             List<Button> buttons = new List<Button>()
             {
