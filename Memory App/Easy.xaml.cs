@@ -30,8 +30,9 @@ namespace Memory_App
         public string img1, img2, butName;
         public int moves = 15;
         public int eScore = 0;
+        public int Score = 0;
         public TextBox txtBox;
-        public int time = 30;
+        public int time = 31;
         public DispatcherTimer Timer;
        
         
@@ -47,10 +48,6 @@ namespace Memory_App
         public Easy()
         {
             this.InitializeComponent();
-            Timer = new DispatcherTimer();
-            Timer.Interval = new TimeSpan(0, 0, 1);
-            Timer.Tick += countdownTimer;
-            Timer.Start();
             score.Visibility = Visibility.Collapsed;
             eScoreTxt.Visibility = Visibility.Collapsed;
             randomPic();
@@ -106,12 +103,50 @@ namespace Memory_App
                     image13.Source = brush2.ImageSource;
                     break;
                 case 3:
+                    Timer = new DispatcherTimer();
+                    Timer.Interval = new TimeSpan(0, 0, 1);
+                    Timer.Tick += countdownTimer;
+                    Timer.Start();
                     break;
 
             }
 
 
             
+        }
+        public async void gameOver()
+        {
+            
+            switch (App.level)
+            {
+                case 1:
+                    if (Score == 6)
+                    {
+                        await Task.Delay(500);
+                        App.easyLevel = eScore;
+                        this.Frame.Navigate(typeof(MainPage), null);
+                    }
+                    break;
+                case 2:
+                    if (Score == 6)
+                    {
+                        await Task.Delay(500);
+                        App.mediumLevel = moves;
+                        this.Frame.Navigate(typeof(MainPage), null);
+                    }
+
+                    break;
+                case 3:
+                    if (Score==6)
+                    {
+                        await Task.Delay(500);
+                        App.hardLevel= time;
+                        this.Frame.Navigate(typeof(MainPage), null);
+                    }
+
+                    break;
+
+            }
         }
         public async void test(Button but, Image img)
         {
@@ -142,6 +177,8 @@ namespace Memory_App
                     eScore++;
                     eScoreTxt.Text = eScore.ToString();
                     score.Text = moves.ToString();
+                    Score++;
+                    gameOver();
                     enableButtons();
 
 
@@ -315,9 +352,14 @@ namespace Memory_App
 
         }
 
-       
+        private void button12_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage), null);
+        }
 
-        
+
+
+
 
 
     }

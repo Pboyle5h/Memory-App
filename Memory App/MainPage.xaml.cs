@@ -43,5 +43,11 @@ namespace Memory_App
             App.level=2;
             this.Frame.Navigate(typeof(Easy), null);
         }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            App.level = 3;
+            this.Frame.Navigate(typeof(Easy), null);
+        }
     }
 }

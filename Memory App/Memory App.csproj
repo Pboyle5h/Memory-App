@@ -121,6 +121,7 @@
     <Content Include="Pictures\folder.png" />
     <Content Include="Pictures\gauge.png" />
     <Content Include="Pictures\hamburger.png" />
+    <Content Include="Pictures\mainMenu.png" />
     <Content Include="Pictures\mediumLevel.png" />
     <Content Include="Pictures\watch.png" />
     <Content Include="Pictures\wine.png" />

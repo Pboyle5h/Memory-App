@@ -9,7 +9,9 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Button x:Name="button1" Content="easy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="303,170,0,0" Click="button1_Click"/>
-        <Button x:Name="button2" Content="medium" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="303,280,0,0" Click="button2_Click"/>
+        <Button x:Name="button2" Content="medium" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="303,292,0,0" Click="button2_Click"/>
+        <Button x:Name="button3" Content="Hard" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="313,390,0,0" Click="button3_Click"/>
+
 
 
     </Grid>
