@@ -34,16 +34,16 @@ namespace Memory_App
         public TextBox txtBox;
         public int time = 31;
         public DispatcherTimer Timer;
-       
-        
-                
+
+
+
         List<Button> butList = new List<Button>()
         {
         };
         List<Image> imgList = new List<Image>()
         {
         };
-              
+
 
         public Easy()
         {
@@ -52,14 +52,14 @@ namespace Memory_App
             eScoreTxt.Visibility = Visibility.Collapsed;
             randomPic();
             level();
-           
-            
+
+
 
         }
 
         private void countdownTimer(object sender, object e)
         {
-           
+
             if (time > 0)
             {
                 if (time <= 10)
@@ -82,9 +82,9 @@ namespace Memory_App
 
         }
 
-    
 
-    public void level()
+
+        public void level()
         {
             switch (App.level)
             {
@@ -93,9 +93,9 @@ namespace Memory_App
                     eScoreTxt.Text = eScore.ToString();
                     ImageBrush brush1 = new ImageBrush();
                     brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174877648874930.png", UriKind.Absolute));
-                    image12.Source = brush1.ImageSource;                    
+                    image12.Source = brush1.ImageSource;
                     break;
-                case 2:                  
+                case 2:
                     score.Visibility = Visibility.Visible;
                     score.Text = moves.ToString();
                     ImageBrush brush2 = new ImageBrush();
@@ -112,11 +112,11 @@ namespace Memory_App
             }
 
 
-            
+
         }
         public async void gameOver()
         {
-            
+
             switch (App.level)
             {
                 case 1:
@@ -137,10 +137,10 @@ namespace Memory_App
 
                     break;
                 case 3:
-                    if (Score==6)
+                    if (Score == 6)
                     {
                         await Task.Delay(500);
-                        App.hardLevel= time;
+                        App.hardLevel = time;
                         this.Frame.Navigate(typeof(MainPage), null);
                     }
 
@@ -187,14 +187,14 @@ namespace Memory_App
                 else
                 {
                     disableButtons();
-                    await Task.Delay(1000);                    
+                    await Task.Delay(1000);
                     img.Visibility = Visibility.Collapsed;
                     but.Visibility = Visibility.Visible;
                     butList[0].Visibility = Visibility.Visible;
                     imgList[0].Visibility = Visibility.Collapsed;
                     butList.RemoveAt(0);
                     imgList.RemoveAt(0);
-                    firstClick = true;                    
+                    firstClick = true;
                     moves--;
                     eScore++;
                     eScoreTxt.Text = eScore.ToString();
@@ -202,11 +202,11 @@ namespace Memory_App
                     enableButtons();
 
                 }
-                
+
             }
 
         }
-       
+
         public void randomPic()
         {
             List<string> pics1 = new List<string>()
@@ -222,7 +222,7 @@ namespace Memory_App
                 "ms-appx:///Pictures/cheese.png",
                 "ms-appx:///Pictures/folder.png",
                 "ms-appx:///Pictures/gauge.png",
-                "ms-appx:///Pictures/hamburger.png"                
+                "ms-appx:///Pictures/hamburger.png"
 
             };
 
@@ -232,18 +232,18 @@ namespace Memory_App
                 image5, image6, image7, image8, image9,
                 image10, image11
             };
-           for (int i=11; i>=0; i--)
-           {
+            for (int i = 11; i >= 0; i--)
+            {
 
                 int randomNumber = rnd.Next(0, pics1.Count);
-                
+
                 ImageBrush brush1 = new ImageBrush();
                 brush1.ImageSource = new BitmapImage(new Uri(pics1[randomNumber], UriKind.Absolute));
 
                 imgs[i].Source = brush1.ImageSource;
                 pics1.RemoveAt(randomNumber);
                 imgs[i].Visibility = Visibility.Collapsed;
-            }         
+            }
         }
 
         public void disableButtons()
@@ -255,14 +255,14 @@ namespace Memory_App
                 button10, button11
             };
 
-            for (int i = 0; i<buttons.Count; i++)
+            for (int i = 0; i < buttons.Count; i++)
             {
                 buttons[i].IsEnabled = false;
-             
+
             }
         }
 
-        public  void enableButtons()
+        public void enableButtons()
         {
             List<Button> buttons = new List<Button>()
             {
@@ -272,22 +272,22 @@ namespace Memory_App
             };
 
             for (int i = 0; i < buttons.Count; i++)
-            {               
+            {
                 buttons[i].IsEnabled = true;
             }
         }
 
-        private  void button_Click(object sender, RoutedEventArgs e)
+        private void button_Click(object sender, RoutedEventArgs e)
         {
             test(button, image0);
 
         }
 
-        private  void button1_Click(object sender, RoutedEventArgs e)
+        private void button1_Click(object sender, RoutedEventArgs e)
         {
             test(button1, image1);
         }
-       
+
         private void button4_Click(object sender, RoutedEventArgs e)
         {
             test(button4, image4);
@@ -333,7 +333,7 @@ namespace Memory_App
 
         }
 
-        private  void button9_Click(object sender, RoutedEventArgs e)
+        private void button9_Click(object sender, RoutedEventArgs e)
         {
             test(button9, image9);
 

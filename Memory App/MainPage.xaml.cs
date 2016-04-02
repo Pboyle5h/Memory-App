@@ -22,15 +22,15 @@ namespace Memory_App
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
-       
+
+
         public MainPage()
         {
-           
+
             this.InitializeComponent();
         }
 
-       
+
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
@@ -40,7 +40,7 @@ namespace Memory_App
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            App.level=2;
+            App.level = 2;
             this.Frame.Navigate(typeof(Easy), null);
         }
 

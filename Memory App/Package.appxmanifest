@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="883c2262-697e-4ca2-ba70-f5027d36bd2d"
+    Name="eb2538cd-2d1c-4635-bd42-9d3d534cb7a8"
     Publisher="CN=pauric"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="883c2262-697e-4ca2-ba70-f5027d36bd2d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="eb2538cd-2d1c-4635-bd42-9d3d534cb7a8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Memory App</DisplayName>

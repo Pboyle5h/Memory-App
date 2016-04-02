@@ -32,12 +32,8 @@ namespace Memory_App
         /// </summary>
         public App()
         {
-            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
-                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
-                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-           
         }
 
         /// <summary>
@@ -47,7 +43,6 @@ namespace Memory_App
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
