@@ -92,14 +92,14 @@ namespace Memory_App
                     eScoreTxt.Visibility = Visibility.Visible;
                     eScoreTxt.Text = eScore.ToString();
                     ImageBrush brush1 = new ImageBrush();
-                    brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/easyLevel2.png", UriKind.Absolute));
-                    image12.Source = brush1.ImageSource;
+                    brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174877648874930.png", UriKind.Absolute));
+                    image12.Source = brush1.ImageSource;                    
                     break;
                 case 2:                  
                     score.Visibility = Visibility.Visible;
                     score.Text = moves.ToString();
                     ImageBrush brush2 = new ImageBrush();
-                    brush2.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/mediumLevel.png", UriKind.Absolute));
+                    brush2.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174907777842293.png", UriKind.Absolute));
                     image13.Source = brush2.ImageSource;
                     break;
                 case 3:
