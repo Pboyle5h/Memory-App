@@ -107,6 +107,10 @@ namespace Memory_App
                     Timer.Interval = new TimeSpan(0, 0, 1);
                     Timer.Tick += countdownTimer;
                     Timer.Start();
+                    ImageBrush brush3 = new ImageBrush();
+                    brush3.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext175048491304424.png", UriKind.Absolute));
+                    image14.Source = brush3.ImageSource;
+
                     break;
 
             }
@@ -132,7 +136,13 @@ namespace Memory_App
                     {
                         await Task.Delay(500);
                         App.mediumLevel = moves;
-                        this.Frame.Navigate(typeof(MainPage), null);
+                        this.Frame.Navigate(typeof(rp), null);
+                    }
+                    if (moves==0)
+                    {
+                        await Task.Delay(500);
+                        App.gameOver = true;
+                        this.Frame.Navigate(typeof(rp), null);
                     }
 
                     break;
@@ -141,7 +151,12 @@ namespace Memory_App
                     {
                         await Task.Delay(500);
                         App.hardLevel = time;
-                        this.Frame.Navigate(typeof(MainPage), null);
+                        this.Frame.Navigate(typeof(rp), null);
+                    }
+                    if (time==0)
+                    {
+                        App.gameOver = true;
+                        this.Frame.Navigate(typeof(rp), null);
                     }
 
                     break;
@@ -200,6 +215,7 @@ namespace Memory_App
                     eScoreTxt.Text = eScore.ToString();
                     score.Text = moves.ToString();
                     enableButtons();
+                    gameOver();
 
                 }
 

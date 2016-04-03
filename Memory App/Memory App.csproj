@@ -113,6 +113,13 @@
     <None Include="Memory App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\StoreLogo.scale-200 - Copy.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Pictures\background_mdpi.png" />
     <Content Include="Pictures\bell.png" />
     <Content Include="Pictures\bottle.png" />
@@ -125,17 +132,13 @@
     <Content Include="Pictures\cooltext174877648874930.png" />
     <Content Include="Pictures\cooltext174907777842293.png" />
     <Content Include="Pictures\cooltext174981939091066.png" />
+    <Content Include="Pictures\cooltext175048263066794.png" />
+    <Content Include="Pictures\cooltext175048350622307.png" />
+    <Content Include="Pictures\cooltext175048491304424.png" />
     <Content Include="Pictures\folder.png" />
     <Content Include="Pictures\gauge.png" />
     <Content Include="Pictures\hamburger.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\StoreLogo.png" />
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

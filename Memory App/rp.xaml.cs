@@ -46,10 +46,41 @@ namespace Memory_App
 
                     break;
                 case 2:
-                    
+                    if (App.gameOver==false) {
+                        ImageBrush brush3 = new ImageBrush();
+                        brush3.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174981939091066.png", UriKind.Absolute));
+                        image1.Source = brush3.ImageSource;
+                        ImageBrush brush4 = new ImageBrush();
+                        brush4.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174907777842293.png", UriKind.Absolute));
+                        image2.Source = brush4.ImageSource;
+                        textBlock.Text = App.mediumLevel.ToString();
+                    }
+                    else if (App.gameOver==true)
+                    {
+                        ImageBrush brush5 = new ImageBrush();
+                        brush5.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext175048263066794.png", UriKind.Absolute));
+                        image1.Source = brush5.ImageSource;
+                    }
+
                     break;
                 case 3:
-                    
+                    if (App.gameOver == false)
+                    {
+                        ImageBrush brush6 = new ImageBrush();
+                        brush6.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174981939091066.png", UriKind.Absolute));
+                        image1.Source = brush6.ImageSource;
+                        ImageBrush brush7 = new ImageBrush();
+                        brush7.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext175048491304424.png", UriKind.Absolute));
+                        image2.Source = brush7.ImageSource;
+                        textBlock.Text = App.hardLevel.ToString();
+                    }
+                    else if (App.gameOver == true)
+                    {
+                        ImageBrush brush8 = new ImageBrush();
+                        brush8.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext175048350622307.png", UriKind.Absolute));
+                        image1.Source = brush8.ImageSource;
+                    }
+
                     break;
 
             }
@@ -61,6 +92,7 @@ namespace Memory_App
         private void button_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage), null);
+            App.gameOver = false;
         }
     }
 }
