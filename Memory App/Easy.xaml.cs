@@ -124,7 +124,7 @@ namespace Memory_App
                     {
                         await Task.Delay(500);
                         App.easyLevel = eScore;
-                        this.Frame.Navigate(typeof(MainPage), null);
+                        this.Frame.Navigate(typeof(rp), null);
                     }
                     break;
                 case 2:

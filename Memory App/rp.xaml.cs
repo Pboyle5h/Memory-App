@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,11 +26,41 @@ namespace Memory_App
         public rp()
         {
             this.InitializeComponent();
+            level();
         }
 
-      //  private void button_Click(object sender, RoutedEventArgs e)
-        //{
-           // this.Frame.Navigate(typeof(MainPage), null);
-        //}
+       
+
+        public void level()
+        {
+            switch (App.level)
+            {
+                case 1:                    
+                    ImageBrush brush1 = new ImageBrush();
+                    brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174981939091066.png", UriKind.Absolute));
+                    image1.Source = brush1.ImageSource;                    
+                    ImageBrush brush2 = new ImageBrush();
+                    brush2.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174877648874930.png", UriKind.Absolute));
+                    image2.Source = brush2.ImageSource;
+                    textBlock.Text = App.easyLevel.ToString();
+
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+
+            }
+
+
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage), null);
+        }
     }
 }
