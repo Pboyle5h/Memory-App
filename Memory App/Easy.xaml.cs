@@ -25,6 +25,7 @@ namespace Memory_App
     /// </summary>
     public sealed partial class Easy : Page
     {
+        //varibles
         public Random rnd = new Random();
         public Boolean firstClick = true;
         public string img1, img2, butName;
@@ -36,7 +37,7 @@ namespace Memory_App
         public DispatcherTimer Timer;
 
 
-
+        //two list used to know which picture has been clicked first
         List<Button> butList = new List<Button>()
         {
         };
@@ -44,7 +45,7 @@ namespace Memory_App
         {
         };
 
-
+        //Main Method 
         public Easy()
         {
             this.InitializeComponent();
@@ -56,7 +57,7 @@ namespace Memory_App
 
 
         }
-
+        //Countdown timer used on the hard level of the game 
         private void countdownTimer(object sender, object e)
         {
 
@@ -83,14 +84,19 @@ namespace Memory_App
         }
 
 
-
+        //to determind which screen to open and which leve is being played 
         public void level()
         {
+            //switch statment switches on the which buton is pressed in the main page
+            //level is a global vairble saved in the App.xaml.cs
             switch (App.level)
             {
                 case 1:
+                    //makes the text block visible when called 
                     eScoreTxt.Visibility = Visibility.Visible;
+                    //adds text to the text block 
                     eScoreTxt.Text = eScore.ToString();
+                    //creates and adds an image 
                     ImageBrush brush1 = new ImageBrush();
                     brush1.ImageSource = new BitmapImage(new Uri("ms-appx:///Pictures/cooltext174877648874930.png", UriKind.Absolute));
                     image12.Source = brush1.ImageSource;
@@ -103,6 +109,7 @@ namespace Memory_App
                     image13.Source = brush2.ImageSource;
                     break;
                 case 3:
+                    //creates and starts the timer 
                     Timer = new DispatcherTimer();
                     Timer.Interval = new TimeSpan(0, 0, 1);
                     Timer.Tick += countdownTimer;
@@ -118,14 +125,17 @@ namespace Memory_App
 
 
         }
+        //game over method used to determine if youve won or lost the game 
         public async void gameOver()
         {
-
+            //sets the rules depending on which level youve picked
             switch (App.level)
             {
                 case 1:
+                    //once score hits 6 means youve won 
                     if (Score == 6)
                     {
+                        //await is used so that the screen doesnt change to quikly and the player cant see the screen 
                         await Task.Delay(500);
                         App.easyLevel = eScore;
                         this.Frame.Navigate(typeof(rp), null);
@@ -138,6 +148,7 @@ namespace Memory_App
                         App.mediumLevel = moves;
                         this.Frame.Navigate(typeof(rp), null);
                     }
+                    //if youve no more moves left youve lost so its changes the Game over varible in app.xaml to true 
                     if (moves==0)
                     {
                         await Task.Delay(500);
@@ -163,13 +174,16 @@ namespace Memory_App
 
             }
         }
-        public async void test(Button but, Image img)
+        // This is the main gameplay method used in the game 
+        public async void gameplay(Button but, Image img)
         {
+            //once this method is called means a button has been pressed the button then get collapssed and the image is made visible 
             img.Visibility = Visibility.Visible;
             but.Visibility = Visibility.Collapsed;
+            //if its the first clicked then there is no need to do any check for a similar image 
             if (firstClick)
             {
-
+                // the button the image are both added to list so that when you click the next image it will remember where you clicked 
                 img1 = ((BitmapImage)img.Source).UriSource.ToString();
                 butList.Add(but);
                 imgList.Add(img);
@@ -177,14 +191,18 @@ namespace Memory_App
             }
             else
             {
+                //get the second image clicked
                 img2 = ((BitmapImage)img.Source).UriSource.ToString();
+                //checks to see if both images are the same 
                 if (img1 == img2)
                 {
+                    //disables the rest of the buttons so that you cant have more than two buttons clicked 
                     disableButtons();
                     img.Visibility = Visibility.Visible;
                     but.Visibility = Visibility.Collapsed;
                     butList[0].Visibility = Visibility.Collapsed;
                     imgList[0].Visibility = Visibility.Visible;
+                    //removes the button and image from there lists so that the next one can be added
                     imgList.RemoveAt(0);
                     butList.RemoveAt(0);
                     firstClick = true;
@@ -193,7 +211,9 @@ namespace Memory_App
                     eScoreTxt.Text = eScore.ToString();
                     score.Text = moves.ToString();
                     Score++;
+                    //calls game over method to check if the game over credentials have been met 
                     gameOver();
+                    //enables buttons for next moves 
                     enableButtons();
 
 
@@ -295,18 +315,18 @@ namespace Memory_App
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            test(button, image0);
+            gameplay(button, image0);
 
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            test(button1, image1);
+            gameplay(button1, image1);
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            test(button4, image4);
+            gameplay(button4, image4);
 
         }
 
@@ -314,14 +334,14 @@ namespace Memory_App
 
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            test(button2, image2);
+            gameplay(button2, image2);
 
         }
 
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            test(button3, image3);
+            gameplay(button3, image3);
 
         }
 
@@ -329,42 +349,42 @@ namespace Memory_App
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
-            test(button5, image5);
+            gameplay(button5, image5);
 
         }
 
         private void button6_Click(object sender, RoutedEventArgs e)
         {
-            test(button6, image6);
+            gameplay(button6, image6);
         }
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
-            test(button7, image7);
+            gameplay(button7, image7);
         }
         private void button8_Click(object sender, RoutedEventArgs e)
         {
-            test(button8, image8);
+            gameplay(button8, image8);
 
 
         }
 
         private void button9_Click(object sender, RoutedEventArgs e)
         {
-            test(button9, image9);
+            gameplay(button9, image9);
 
 
         }
 
         private void button10_Click(object sender, RoutedEventArgs e)
         {
-            test(button10, image10);
+            gameplay(button10, image10);
 
         }
 
         private void button11_Click(object sender, RoutedEventArgs e)
         {
-            test(button11, image11);
+            gameplay(button11, image11);
 
         }
 
